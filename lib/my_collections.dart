@@ -9,7 +9,7 @@ class MyCollections extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Material App',
+      title: 'My Collections App',
       home: const MyCollectionsView(),
       theme: darkTheme,
     );
