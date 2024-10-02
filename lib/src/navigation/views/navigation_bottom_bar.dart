@@ -8,12 +8,14 @@ class NavigationBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final navigationBottomBarNotifier = Provider.of<NavigationNotifier>(context);
+    final navigationBottomBarNotifier =
+        Provider.of<NavigationNotifier>(context);
 
     return BottomNavigationBar(
       currentIndex: navigationBottomBarNotifier.getCurrentIndex,
       onTap: (index) => navigationBottomBarNotifier.updateCurrentIndex(index),
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Colors.blue.shade500,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

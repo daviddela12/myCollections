@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../carousel/views/carousel_view.dart';
 import '../../categories/views/categories_view.dart';
 
 class HomeView extends StatelessWidget {
@@ -6,21 +7,28 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-        body: Column(
-          children: <Widget>[
-            const CategoriesView(),
-            Expanded(
-              child: Container(
-                color: Colors.blue,
-                child: const Center(
-                  child: Text('Home view'),
-                ),
+        body: Padding(
+            padding:
+                EdgeInsets.all(5.0), // Adds padding of 16 pixels on all sides
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  CategoriesView(),
+                  /**const Divider(
+              color: Colors.grey, // Color of the line
+              thickness: 1,        // Thickness of the line
+            ),**/
+                  Column(
+                    children: <Widget>[
+                      CarouselView(),
+                    ],
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
+            )),
       ),
     );
   }

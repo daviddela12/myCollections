@@ -12,9 +12,18 @@ class MyCollectionsView extends StatelessWidget {
     // return const Placeholder();
     return ChangeNotifierProvider(
       create: (BuildContext context) => NavigationNotifier(),
-      child: const Scaffold(
-        body: NavigationPageView(),
-        bottomNavigationBar: NavigationBottomBar(),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.black45,
+          title: const Align(
+            alignment: Alignment.centerLeft,
+            child: Text('My Collections',
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold)),
+          ),
+        ),
+        body: const NavigationPageView(),
+        bottomNavigationBar: const NavigationBottomBar(),
       ),
     );
   }
