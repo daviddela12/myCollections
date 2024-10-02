@@ -4,11 +4,9 @@ import 'package:provider/provider.dart';
 
 import 'my_collections.dart';
 
-void main() => runApp(
-    MultiProvider(
+void main() => runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_)=> CategoryService() ),
+        ChangeNotifierProvider(create: (_) => CategoryService()),
       ],
       child: const MyCollections(),
-  )
-);
+    ));
