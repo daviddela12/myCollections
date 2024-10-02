@@ -15,6 +15,7 @@ class NavigationBottomBar extends StatelessWidget {
       currentIndex: navigationBottomBarNotifier.getCurrentIndex,
       onTap: (index) => navigationBottomBarNotifier.updateCurrentIndex(index),
       type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.black45,
       selectedItemColor: Colors.blue.shade500,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -22,8 +23,8 @@ class NavigationBottomBar extends StatelessWidget {
           label: 'Your Collection',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.star),
-          label: 'Favs',
+          icon: Icon(Icons.settings),
+          label: 'Categories',
         ),
       ],
     );

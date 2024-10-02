@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../carousel/views/carousel_view.dart';
 import '../../categories/views/categories_view.dart';
+import 'home_item_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -21,11 +22,8 @@ class HomeView extends StatelessWidget {
               color: Colors.grey, // Color of the line
               thickness: 1,        // Thickness of the line
             ),**/
-                  Column(
-                    children: <Widget>[
-                      CarouselView(),
-                    ],
-                  ),
+                  CarouselView(),
+                  HomeItemView(),
                 ],
               ),
             )),
