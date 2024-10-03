@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../carousel/views/carousel_view.dart';
 import '../../categories/views/categories_view.dart';
-import 'home_item_view.dart';
+import '../../elements/views/elements_list_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
               thickness: 1,        // Thickness of the line
             ),**/
                   CarouselView(),
-                  HomeItemView(),
+                  ElementsListView(),
                 ],
               ),
             )),
