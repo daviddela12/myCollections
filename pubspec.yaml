@@ -39,6 +39,12 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   carousel_slider: ^4.2.1
   intl: ^0.17.0 # Agrega intl para manejar fechas
+  sqflite: ^2.3.3+1
+  sqflite_common_ffi: ^2.3.3
+  path: ^1.9.0 # Agrega path para manejar rutas
+  image_picker: ^1.1.2
+  flutter_image_compress: ^2.3.0
+  uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:

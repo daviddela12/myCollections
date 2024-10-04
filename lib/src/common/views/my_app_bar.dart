@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../categories/views/category_form_view.dart';
+
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
@@ -18,13 +20,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         PopupMenuButton<String>(
           onSelected: (String result) {
-            // Aquí defines la acción cuando se selecciona una opción
-            print(result);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CategoryFormView()),
+            );
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             const PopupMenuItem<String>(
-              value: 'Categories',
-              child: Text('Categories'),
+              value: 'Add Category',
+              child: Text('Add Category'),
             ),
           ],
         ),
@@ -33,5 +37,5 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

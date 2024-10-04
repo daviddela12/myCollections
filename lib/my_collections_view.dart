@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_collections/src/categories/views/category_form_view.dart';
 import 'package:my_collections/src/common/views/my_app_bar.dart';
 import 'package:my_collections/src/navigation/notifiers/navigation_notifier.dart';
 import 'package:my_collections/src/navigation/views/navigation_page_view.dart';
@@ -16,13 +17,10 @@ class MyCollectionsView extends StatelessWidget {
         appBar: const MyAppBar(title: 'My Collections'),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // Llevar al formulario
-            /**
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FormularioScreen()),
+              MaterialPageRoute(builder: (context) => const CategoryFormView()),
             );
-                **/
           },
           child: const Icon(Icons.add),
         ),

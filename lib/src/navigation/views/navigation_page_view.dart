@@ -17,13 +17,8 @@ class NavigationPageView extends StatelessWidget {
       // physics: const AlwaysScrollableScrollPhysics(),
       // physics: const BouncingScrollPhysics(),
       physics: const NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        const HomeView(),
-        Container(
-          child: const Center(
-            child: Text('Borrar 1'),
-          ),
-        ),
+      children: const <Widget>[
+        HomeView(),
       ],
     );
   }

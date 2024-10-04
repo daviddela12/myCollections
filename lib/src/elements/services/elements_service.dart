@@ -6,6 +6,7 @@ import '../models/element_item_model.dart';
 
 class ElementsService with ChangeNotifier {
   final CategoryService categoryService;
+
   List<ElementItem> collectionElements = [];
 
   ElementsService(this.categoryService) {
@@ -18,8 +19,6 @@ class ElementsService with ChangeNotifier {
           categories: [
             categoryService.categories[0],
             categoryService.categories[1],
-            categoryService.categories[2],
-            categoryService.categories[3]
           ]),
       ElementItem(
           name: "Favourites",
@@ -41,5 +40,18 @@ class ElementsService with ChangeNotifier {
           icon: FontAwesomeIcons.plantWilt,
           imageAsset: 'assets/images/6.png'),
     ];
+  }
+
+  void toggleFavouriteStatus(int index) {
+    collectionElements[index].isFavourite =
+        !collectionElements[index].isFavourite;
+    notifyListeners();
+  }
+
+  getElementsByCategory(String categoryName) {
+    return collectionElements
+        .where((element) =>
+            element.categories.any((category) => category.name == categoryName))
+        .toList();
   }
 }

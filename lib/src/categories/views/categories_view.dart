@@ -7,7 +7,41 @@ class CategoriesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categories = Provider.of<CategoryService>(context).categories;
+    final categoryService =
+        Provider.of<CategoryService>(context, listen: false);
+
+    final categories = categoryService.categories;
+
+    final selectedCategory = categoryService.selectedCategory;
+
+    if (categories.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    // Método para mostrar el popup con la opción de eliminar
+    void _showPopupMenu(int index, Offset offset) async {
+      await showMenu(
+        context: context,
+        position:
+            RelativeRect.fromLTRB(offset.dx, offset.dy, offset.dx, offset.dy),
+        items: [
+          const PopupMenuItem(
+            value: 'delete',
+            child: Text('Delete'),
+          ),
+        ],
+        elevation: 8.0,
+      ).then((value) async {
+        if (value == 'delete') {
+          await categoryService.deleteCategory(index);
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Item deleted'),
+            ));
+          }
+        }
+      });
+    }
 
     return Container(
       child: SizedBox(
@@ -23,6 +57,16 @@ class CategoriesView extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     print('Category: ${categories[index].name}');
+                    categoryService.selectCategory(
+                        context, categories[index].name);
+                  },
+                  onLongPressStart: (details) {
+                    // Mostrar el menú emergente en la ubicación del toque
+                    if (categories[index].name == 'All' ||
+                        categories[index].name == 'Favourites') {
+                      return;
+                    }
+                    _showPopupMenu(index, details.globalPosition);
                   },
                   child: Container(
                     padding: const EdgeInsets.only(top: 15),
@@ -38,17 +82,17 @@ class CategoriesView extends StatelessWidget {
                         ),**/
                         Container(
                           padding: const EdgeInsets.only(
-                              top: 5,
-                              bottom: 5,
-                              left: 15,
-                              right: 15), // Adds padding inside the container
-                          margin: const EdgeInsets.all(
-                              5), // Adds margin outside the container
+                              top: 5, bottom: 5, left: 15, right: 15),
+                          margin: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                            color: Colors.blue
-                                .shade300, // Background color of the container
-                            borderRadius:
-                                BorderRadius.circular(5), // Rounded edges
+                            color: (categories[index].name == selectedCategory)
+                                ? Colors.blue.shade900
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                              color: Colors.blue.shade900,
+                              width: 2.0,
+                            ),
                           ),
                           child: Text(
                             categories[index].name,

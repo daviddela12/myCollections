@@ -8,7 +8,7 @@ class ElementItem {
   final IconData icon;
   final String imageAsset;
   final DateTime createdAt;
-  final bool isFavourite;
+  bool isFavourite;
   final List<Category> categories;
 
   ElementItem({
