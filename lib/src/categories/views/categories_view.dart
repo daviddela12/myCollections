@@ -7,8 +7,7 @@ class CategoriesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categoryService =
-        Provider.of<CategoryService>(context, listen: false);
+    final categoryService = Provider.of<CategoryService>(context, listen: true);
 
     final categories = categoryService.categories;
 
@@ -61,7 +60,6 @@ class CategoriesView extends StatelessWidget {
                         context, categories[index].name);
                   },
                   onLongPressStart: (details) {
-                    // Mostrar el menú emergente en la ubicación del toque
                     if (categories[index].name == 'All' ||
                         categories[index].name == 'Favourites') {
                       return;

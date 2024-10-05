@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_collections/src/categories/views/category_form_view.dart';
+import 'package:my_collections/src/categories/views/category_add_form_view.dart';
 import 'package:my_collections/src/common/views/my_app_bar.dart';
 import 'package:my_collections/src/navigation/notifiers/navigation_notifier.dart';
 import 'package:my_collections/src/navigation/views/navigation_page_view.dart';
@@ -19,7 +19,8 @@ class MyCollectionsView extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CategoryFormView()),
+              MaterialPageRoute(
+                  builder: (context) => const CategoryAddFormView()),
             );
           },
           child: const Icon(Icons.add),

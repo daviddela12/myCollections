@@ -19,9 +19,9 @@ class HomeView extends StatelessWidget {
                 children: <Widget>[
                   CategoriesView(),
                   /**const Divider(
-              color: Colors.grey, // Color of the line
-              thickness: 1,        // Thickness of the line
-            ),**/
+                    color: Colors.grey,
+                    thickness: 1,
+                  ),**/
                   CarouselView(),
                   ElementsListView(),
                 ],

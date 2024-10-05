@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 
 import '../services/category_service.dart';
 
-class CategoryFormView extends StatefulWidget {
-  const CategoryFormView({super.key});
+class CategoryAddFormView extends StatefulWidget {
+  const CategoryAddFormView({super.key});
 
   @override
   _CategoryFormState createState() => _CategoryFormState();
 }
 
-class _CategoryFormState extends State<CategoryFormView> {
+class _CategoryFormState extends State<CategoryAddFormView> {
   final _nameController = TextEditingController();
 
   void _saveCategory() async {
@@ -38,6 +38,7 @@ class _CategoryFormState extends State<CategoryFormView> {
               controller: _nameController,
               decoration: const InputDecoration(labelText: 'Name'),
             ),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: _saveCategory,
               child: const Text('Save'),

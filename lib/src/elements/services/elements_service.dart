@@ -9,6 +9,8 @@ class ElementsService with ChangeNotifier {
 
   List<ElementItem> collectionElements = [];
 
+  List<ElementItem> collectionElementsFiltered = [];
+
   ElementsService(this.categoryService) {
     collectionElements = [
       ElementItem(
@@ -16,8 +18,8 @@ class ElementsService with ChangeNotifier {
           description: "test description",
           icon: FontAwesomeIcons.list,
           imageAsset: 'assets/images/6.png',
+          isFavourite: true,
           categories: [
-            categoryService.categories[0],
             categoryService.categories[1],
           ]),
       ElementItem(
@@ -30,28 +32,45 @@ class ElementsService with ChangeNotifier {
           description: "test description",
           icon: FontAwesomeIcons.cloudMeatball,
           imageAsset: 'assets/images/6.png',
-          categories: [
-            categoryService.categories[0],
-            categoryService.categories[1]
-          ]),
+          isFavourite: true,
+          categories: [categoryService.categories[1]]),
       ElementItem(
           name: "Herbivore",
           description: "test description",
           icon: FontAwesomeIcons.plantWilt,
           imageAsset: 'assets/images/6.png'),
     ];
+    collectionElementsFiltered = collectionElements;
   }
 
-  void toggleFavouriteStatus(int index) {
+  void toggleFavouriteStatus(String id) {
+    final index = collectionElements.indexWhere((element) => element.id == id);
+    if (index == -1) return;
+
     collectionElements[index].isFavourite =
         !collectionElements[index].isFavourite;
-    notifyListeners();
+
+    getElementsByCategory(categoryService.selectedCategory);
   }
 
   getElementsByCategory(String categoryName) {
-    return collectionElements
-        .where((element) =>
-            element.categories.any((category) => category.name == categoryName))
-        .toList();
+    switch (categoryName) {
+      case "All":
+        collectionElementsFiltered = collectionElements;
+        break;
+      case "Favourites":
+        collectionElementsFiltered =
+            collectionElements.where((element) => element.isFavourite).toList();
+        break;
+      default:
+        collectionElementsFiltered = collectionElements
+            .where((element) =>
+                element.categories != null &&
+                element.categories
+                    .any((category) => category.name == categoryName))
+            .toList();
+        break;
+    }
+    notifyListeners();
   }
 }

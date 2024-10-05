@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../categories/views/category_form_view.dart';
+import '../../categories/views/category_add_form_view.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -22,7 +22,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           onSelected: (String result) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const CategoryFormView()),
+              MaterialPageRoute(
+                  builder: (context) => const CategoryAddFormView()),
             );
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[

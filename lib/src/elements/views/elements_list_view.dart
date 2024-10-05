@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:my_collections/src/elements/services/elements_service.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +11,7 @@ class ElementsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.only(bottom: 60, top: 15),
-      child: Column(children: [
+      child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
         Text('Chronology of Elements', style: TextStyle(fontSize: 20)),
         _MyListView(),
       ]),
@@ -25,43 +24,64 @@ class _MyListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final collectionElements =
-        Provider.of<ElementsService>(context).collectionElements;
+    final elementsService = Provider.of<ElementsService>(context);
 
-    return ListView.builder(
-        itemCount: collectionElements.length,
-        scrollDirection: Axis.vertical,
-        shrinkWrap:
-            true, //  Tells the ListView.builder to take only the height required for its content.
-        itemBuilder: (context, index) {
-          return ListTile(
-            /**leading: CircleAvatar(
-              radius: 25,
-              child: Icon(
-                collectionElements[index].icon,
-                size: 15,
-              ),
-            ),**/
-            leading: CircleAvatar(
-              radius: 25,
-              backgroundImage: AssetImage(collectionElements[index].imageAsset),
-            ),
-            title: Text(
-              collectionElements[index].name,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(collectionElements[index].description),
-            trailing: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(DateFormat('yyyy-MM-dd')
-                    .format(collectionElements[index].createdAt)),
-                const Padding(padding: EdgeInsets.only(top: 5)),
-                CategoriesSlugView(
-                    categories: collectionElements[index].categories),
-              ],
-            ),
-          );
-        });
+    final collectionElementsFiltered =
+        elementsService.collectionElementsFiltered;
+
+    return collectionElementsFiltered.isNotEmpty
+        ? ListView.builder(
+            itemCount: collectionElementsFiltered.length,
+            scrollDirection: Axis.vertical,
+            shrinkWrap:
+                true, //  Tells the ListView.builder to take only the height required for its content.
+            itemBuilder: (context, index) {
+              return ListTile(
+                /**leading: CircleAvatar(
+                  radius: 25,
+                  child: Icon(
+                    collectionElements[index].icon,
+                    size: 15,
+                  ),
+                ),**/
+                leading: CircleAvatar(
+                  radius: 25,
+                  backgroundImage:
+                      AssetImage(collectionElementsFiltered[index].imageAsset),
+                ),
+                title: Text(
+                  collectionElementsFiltered[index].name,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(collectionElementsFiltered[index].descriptionShort),
+                      Text(
+                          collectionElementsFiltered[index].createdAtFormatted),
+                      const Padding(padding: EdgeInsets.only(top: 5)),
+                      CategoriesSlugView(
+                          categories:
+                              collectionElementsFiltered[index].categories),
+                    ]),
+                trailing: Column(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        collectionElementsFiltered[index].isFavouriteIcon,
+                        color:
+                            collectionElementsFiltered[index].isFavouriteColor,
+                      ),
+                      onPressed: () {
+                        elementsService.toggleFavouriteStatus(
+                            collectionElementsFiltered[index].getId);
+                      },
+                    ),
+                  ],
+                ),
+              );
+            })
+        : const Center(child: Text("No elements found"));
   }
 }
